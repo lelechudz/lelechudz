@@ -90,9 +90,9 @@ export const PROJECTS: readonly Project[] = [
       { label: "Scope", value: "Global routes" },
       { label: "Data", value: "Maps + FX APIs" },
     ],
-    position: [0.45, 1.0, -1.4],
-    rotation: [0, -0.18, -0.04],
-    scale: 0.72,
+    position: [2.6, 1.05, -1.5],
+    rotation: [0, -0.3, -0.06],
+    scale: 0.66,
   },
 ] as const;
 

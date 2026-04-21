@@ -22,8 +22,8 @@ export function AuroraBackground() {
   useFrame((_, dt) => {
     uniforms.uTime.value += dt;
     const target = uniforms.uPointer.value;
-    target.x += (pointer.x - target.x) * Math.min(1, dt * 5);
-    target.y += (pointer.y - target.y) * Math.min(1, dt * 5);
+    target.x += (pointer.x - target.x) * Math.min(1, dt * 3.5);
+    target.y += (pointer.y - target.y) * Math.min(1, dt * 3.5);
     uniforms.uResolution.value.set(size.width, size.height);
   });
 
