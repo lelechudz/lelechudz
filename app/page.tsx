@@ -6,6 +6,7 @@ import { PitchSection } from "@/components/sections/PitchSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import { ExperienceSection } from "@/components/sections/ExperienceSection";
 import { EducationSection } from "@/components/sections/EducationSection";
+import { ContactSection } from "@/components/sections/ContactSection";
 
 export default function Home() {
   return (
@@ -24,7 +25,7 @@ export default function Home() {
       <ProjectsSection />
       <ExperienceSection />
       <EducationSection />
-      <section id="contact" className="min-h-screen border-t border-[var(--glass-stroke)]"></section>
+      <ContactSection />
     </>
   );
 }
