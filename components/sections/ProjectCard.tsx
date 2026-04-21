@@ -69,6 +69,7 @@ export function ProjectCard({ project, index }: Props) {
           src={project.screen}
           alt={`${project.title} app screen`}
           accent={project.accent}
+          href={`/projects/${project.slug}`}
         />
       </div>
     </article>

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useRef, useState } from "react";
 import clsx from "clsx";
 
@@ -10,6 +11,7 @@ interface Props {
   accent?: string;
   className?: string;
   priority?: boolean;
+  href?: string;
 }
 
 export function PhoneFrame({
@@ -18,6 +20,7 @@ export function PhoneFrame({
   accent = "#ffb347",
   className,
   priority = false,
+  href,
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
@@ -40,7 +43,7 @@ export function PhoneFrame({
   const lift = hovered ? 36 : 0;
   const scale = hovered ? 1.03 : 1;
 
-  return (
+  const frame = (
     <div
       ref={ref}
       onMouseEnter={() => setHovered(true)}
@@ -49,7 +52,7 @@ export function PhoneFrame({
       className={clsx("relative mx-auto", className)}
       style={{
         width: 272,
-        height: 552,
+        height: 604,
         perspective: "1400px",
       }}
     >
@@ -78,7 +81,7 @@ export function PhoneFrame({
           />
           <div
             aria-hidden
-            className="absolute left-1/2 top-[7px] z-10 h-[26px] w-[86px] -translate-x-1/2 rounded-full bg-black"
+            className="absolute left-1/2 top-[10px] z-10 h-[18px] w-[86px] -translate-x-1/2 rounded-full bg-black"
             style={{
               boxShadow:
                 "0 0 0 1px rgba(255,255,255,0.06), 0 2px 6px rgba(0,0,0,0.8)",
@@ -86,14 +89,14 @@ export function PhoneFrame({
           />
           <div
             aria-hidden
+            className="pointer-events-none absolute bottom-[7px] left-1/2 z-10 h-[4px] w-[104px] -translate-x-1/2 rounded-full bg-white/75"
+          />
+          <div
+            aria-hidden
             className="pointer-events-none absolute inset-0 rounded-[36px]"
             style={{
-              background: hovered
-                ? `linear-gradient(135deg, transparent 30%, ${accent}20 50%, transparent 70%)`
-                : "transparent",
               boxShadow:
                 "inset 0 0 40px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.08)",
-              transition: "background 500ms ease",
             }}
           />
         </div>
@@ -116,4 +119,19 @@ export function PhoneFrame({
       </div>
     </div>
   );
+
+  if (href) {
+    return (
+      <Link
+        href={href}
+        aria-label={`Open ${alt}`}
+        data-cursor="hover"
+        className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 rounded-[40px]"
+      >
+        {frame}
+      </Link>
+    );
+  }
+
+  return frame;
 }
