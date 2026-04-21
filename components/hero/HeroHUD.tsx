@@ -3,12 +3,14 @@
 import { useEffect, useState } from "react";
 import { ScrambleText } from "@/components/ui/ScrambleText";
 import { useFocusedPhone } from "./focusStore";
+import { useMediaQuery } from "@/lib/useMediaQuery";
 
 export function HeroHUD() {
   const [time, setTime] = useState<string>("--:--:--");
   const [hintVisible, setHintVisible] = useState(true);
   const focused = useFocusedPhone();
   const dim = focused !== null;
+  const isMobile = useMediaQuery("(max-width: 767px)");
 
   useEffect(() => {
     const tick = () => {
@@ -32,6 +34,19 @@ export function HeroHUD() {
       window.removeEventListener("pointerdown", onInteract);
     };
   }, []);
+
+  if (isMobile) {
+    return (
+      <div className="pointer-events-none absolute inset-0 z-20 text-text-primary">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-3">
+          <span className="absolute left-0 top-0 h-3 w-3 border-l border-t border-text-dim" />
+          <span className="absolute right-0 top-0 h-3 w-3 border-r border-t border-text-dim" />
+          <span className="absolute bottom-0 left-0 h-3 w-3 border-b border-l border-text-dim" />
+          <span className="absolute bottom-0 right-0 h-3 w-3 border-b border-r border-text-dim" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="pointer-events-none absolute inset-0 z-20 text-text-primary">
