@@ -1,8 +1,8 @@
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { PROJECTS, isProjectSlug, getProject } from "@/lib/projects";
+import { PhoneFrame } from "@/components/ui/PhoneFrame";
 
 export function generateStaticParams() {
   return PROJECTS.map((p) => ({ slug: p.slug }));
@@ -83,20 +83,13 @@ export default async function ProjectPage({
           </div>
         </div>
 
-        <div className="order-1 md:order-2">
-          <div
-            className="relative aspect-[9/19.5] overflow-hidden rounded-[32px] border border-[var(--glass-stroke)] bg-[#0a0a12] shadow-[0_30px_80px_rgba(0,0,0,0.5)]"
-            style={{ boxShadow: `0 30px 80px ${p.accent}22, 0 0 60px ${p.accent}22` }}
-          >
-            <Image
-              src={p.screen}
-              alt={`${p.title} app screenshot`}
-              fill
-              sizes="(max-width: 768px) 100vw, 400px"
-              className="object-cover"
-              priority
-            />
-          </div>
+        <div className="order-1 flex justify-center md:order-2">
+          <PhoneFrame
+            src={p.screen}
+            alt={`${p.title} app screenshot`}
+            accent={p.accent}
+            priority
+          />
         </div>
       </div>
     </main>

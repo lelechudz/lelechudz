@@ -11,6 +11,9 @@ import screenMain from "@/shaders/screen.frag";
 
 const screenFrag = `${bayerLib}\n${screenMain}`;
 
+const BODY_COLOR = new THREE.Color("#12121c");
+const BODY_COLOR_DIM = new THREE.Color("#0a0a10");
+
 interface Props {
   project: Project;
   focused: boolean;
@@ -29,6 +32,7 @@ export function Phone({ project, focused, dimmed, onHover, onClick }: Props) {
     screenTexture.colorSpace = THREE.SRGBColorSpace;
     screenTexture.minFilter = THREE.LinearFilter;
     screenTexture.magFilter = THREE.LinearFilter;
+    screenTexture.anisotropy = 8;
   }, [screenTexture]);
 
   const screenUniforms = useMemo(
@@ -70,16 +74,16 @@ export function Phone({ project, focused, dimmed, onHover, onClick }: Props) {
     if (screenRef.current) {
       const u = screenRef.current.uniforms;
       u.uTime!.value += dt;
-      const targetBrightness = focused ? 1.25 : dimmed ? 0.45 : 1.0;
+      const targetBrightness = focused ? 1.2 : dimmed ? 0.35 : 1.0;
       u.uBrightness!.value += (targetBrightness - u.uBrightness!.value) * k;
-      const targetDither = focused ? 1.5 : 3.0;
+      const targetDither = focused ? 1.2 : 3.0;
       u.uDitherSize!.value += (targetDither - u.uDitherSize!.value) * k;
     }
 
     if (bodyRef.current) {
       const mat = bodyRef.current.material as THREE.MeshStandardMaterial;
-      const targetOpacity = dimmed ? 0.35 : 1.0;
-      mat.opacity += (targetOpacity - mat.opacity) * k;
+      const target = dimmed ? BODY_COLOR_DIM : BODY_COLOR;
+      mat.color.lerp(target, k);
     }
   });
 
@@ -104,17 +108,21 @@ export function Phone({ project, focused, dimmed, onHover, onClick }: Props) {
         onClick(project.slug);
       }}
     >
-      <RoundedBox ref={bodyRef} args={[0.95, 1.95, 0.08]} radius={0.09} smoothness={6} creaseAngle={0.4}>
+      <RoundedBox
+        ref={bodyRef}
+        args={[0.95, 1.95, 0.1]}
+        radius={0.13}
+        smoothness={8}
+        creaseAngle={0.4}
+      >
         <meshStandardMaterial
-          color="#0f0f18"
-          roughness={0.35}
-          metalness={0.55}
-          transparent
-          opacity={1}
+          color={BODY_COLOR}
+          roughness={0.28}
+          metalness={0.75}
         />
       </RoundedBox>
-      <mesh position={[0, 0, 0.041]}>
-        <planeGeometry args={[0.84, 1.82]} />
+      <mesh position={[0, 0, 0.051]}>
+        <planeGeometry args={[0.88, 1.88]} />
         <shaderMaterial
           ref={screenRef}
           vertexShader={screenVert}
@@ -123,49 +131,52 @@ export function Phone({ project, focused, dimmed, onHover, onClick }: Props) {
           transparent={false}
         />
       </mesh>
-      <mesh position={[0, 0.82, 0.042]}>
-        <boxGeometry args={[0.22, 0.04, 0.002]} />
-        <meshStandardMaterial color="#05050a" roughness={0.9} />
+      <mesh position={[0, 0.84, 0.052]}>
+        <boxGeometry args={[0.26, 0.06, 0.002]} />
+        <meshStandardMaterial color="#030308" roughness={0.95} />
       </mesh>
 
-      <RoundedBox
-        args={[0.3, 0.3, 0.04]}
-        radius={0.05}
-        smoothness={4}
-        position={[-0.22, 0.6, -0.065]}
-      >
-        <meshStandardMaterial color="#0a0a12" roughness={0.7} metalness={0.35} />
-      </RoundedBox>
-      <mesh position={[-0.29, 0.68, -0.09]} rotation={[Math.PI / 2, 0, 0]}>
-        <cylinderGeometry args={[0.055, 0.055, 0.025, 24]} />
-        <meshStandardMaterial color="#02020a" roughness={0.15} metalness={0.95} />
-      </mesh>
-      <mesh position={[-0.29, 0.68, -0.105]} rotation={[Math.PI / 2, 0, 0]}>
-        <cylinderGeometry args={[0.028, 0.028, 0.005, 24]} />
-        <meshStandardMaterial
-          color="#4a9eff"
-          emissive="#2a5dff"
-          emissiveIntensity={0.3}
-          roughness={0.1}
-          metalness={0.8}
-        />
-      </mesh>
-      <mesh position={[-0.14, 0.54, -0.09]} rotation={[Math.PI / 2, 0, 0]}>
-        <cylinderGeometry args={[0.042, 0.042, 0.022, 24]} />
-        <meshStandardMaterial color="#02020a" roughness={0.15} metalness={0.95} />
-      </mesh>
-      <mesh position={[-0.14, 0.54, -0.103]} rotation={[Math.PI / 2, 0, 0]}>
-        <cylinderGeometry args={[0.02, 0.02, 0.005, 24]} />
-        <meshStandardMaterial color="#1a1a24" roughness={0.2} metalness={0.7} />
-      </mesh>
-      <mesh position={[-0.07, 0.72, -0.07]}>
-        <boxGeometry args={[0.015, 0.015, 0.003]} />
-        <meshStandardMaterial
-          color="#ffb347"
-          emissive="#ffb347"
-          emissiveIntensity={0.6}
-        />
-      </mesh>
+      <group position={[-0.26, 0.66, -0.07]}>
+        <RoundedBox args={[0.3, 0.3, 0.04]} radius={0.07} smoothness={8}>
+          <meshStandardMaterial color="#080810" roughness={0.5} metalness={0.6} />
+        </RoundedBox>
+        <mesh position={[-0.06, 0.06, -0.025]} rotation={[Math.PI / 2, 0, 0]}>
+          <cylinderGeometry args={[0.058, 0.058, 0.02, 32]} />
+          <meshStandardMaterial color="#02020a" roughness={0.15} metalness={0.95} />
+        </mesh>
+        <mesh position={[-0.06, 0.06, -0.037]} rotation={[Math.PI / 2, 0, 0]}>
+          <cylinderGeometry args={[0.028, 0.028, 0.003, 32]} />
+          <meshStandardMaterial
+            color="#1e2a5a"
+            roughness={0.3}
+            metalness={0.8}
+          />
+        </mesh>
+        <mesh position={[0.06, 0.06, -0.025]} rotation={[Math.PI / 2, 0, 0]}>
+          <cylinderGeometry args={[0.052, 0.052, 0.02, 32]} />
+          <meshStandardMaterial color="#02020a" roughness={0.15} metalness={0.95} />
+        </mesh>
+        <mesh position={[0.06, 0.06, -0.037]} rotation={[Math.PI / 2, 0, 0]}>
+          <cylinderGeometry args={[0.024, 0.024, 0.003, 32]} />
+          <meshStandardMaterial color="#0a0a14" roughness={0.4} metalness={0.7} />
+        </mesh>
+        <mesh position={[0, -0.05, -0.025]} rotation={[Math.PI / 2, 0, 0]}>
+          <cylinderGeometry args={[0.048, 0.048, 0.02, 32]} />
+          <meshStandardMaterial color="#02020a" roughness={0.15} metalness={0.95} />
+        </mesh>
+        <mesh position={[0, -0.05, -0.037]} rotation={[Math.PI / 2, 0, 0]}>
+          <cylinderGeometry args={[0.022, 0.022, 0.003, 32]} />
+          <meshStandardMaterial color="#14141e" roughness={0.5} metalness={0.6} />
+        </mesh>
+        <mesh position={[0.08, -0.08, -0.023]}>
+          <boxGeometry args={[0.022, 0.022, 0.004]} />
+          <meshStandardMaterial
+            color="#ffe7c2"
+            emissive="#ffb668"
+            emissiveIntensity={0.35}
+          />
+        </mesh>
+      </group>
     </group>
   );
 }
