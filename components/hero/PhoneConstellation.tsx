@@ -24,6 +24,7 @@ export function PhoneConstellation({ reducedMotion }: Props) {
 
   const dragRef = useRef({ active: false, lastX: 0, lastY: 0, moved: false });
   const dragOffset = useRef({ y: 0, x: 0 });
+  const dragVelocity = useRef({ y: 0, x: 0 });
 
   useEffect(() => {
     setFocusedPhone(hovered);
@@ -39,6 +40,8 @@ export function PhoneConstellation({ reducedMotion }: Props) {
       dragRef.current.moved = false;
       dragRef.current.lastX = e.clientX;
       dragRef.current.lastY = e.clientY;
+      dragVelocity.current.y = 0;
+      dragVelocity.current.x = 0;
       document.body.style.cursor = "grabbing";
     };
     const onMove = (e: PointerEvent) => {
@@ -48,16 +51,16 @@ export function PhoneConstellation({ reducedMotion }: Props) {
       dragRef.current.lastX = e.clientX;
       dragRef.current.lastY = e.clientY;
       if (Math.abs(dx) > 1 || Math.abs(dy) > 1) dragRef.current.moved = true;
-      dragOffset.current.y = THREE.MathUtils.clamp(
-        dragOffset.current.y + dx * 0.005,
-        -1.2,
-        1.2,
-      );
+      const dyAngle = dx * 0.006;
+      const dxAngle = dy * 0.003;
+      dragOffset.current.y += dyAngle;
       dragOffset.current.x = THREE.MathUtils.clamp(
-        dragOffset.current.x + dy * 0.003,
-        -0.35,
-        0.35,
+        dragOffset.current.x + dxAngle,
+        -0.4,
+        0.4,
       );
+      dragVelocity.current.y = dyAngle * 60;
+      dragVelocity.current.x = dxAngle * 60;
     };
     const onUp = () => {
       if (!dragRef.current.active) return;
@@ -79,9 +82,18 @@ export function PhoneConstellation({ reducedMotion }: Props) {
     const k = 1 - Math.exp(-dt * 8);
 
     if (!dragRef.current.active && !reducedMotion) {
-      const decay = Math.exp(-dt * 1.3);
-      dragOffset.current.y *= decay;
-      dragOffset.current.x *= decay;
+      dragOffset.current.y += dragVelocity.current.y * dt;
+      dragOffset.current.x = THREE.MathUtils.clamp(
+        dragOffset.current.x + dragVelocity.current.x * dt,
+        -0.4,
+        0.4,
+      );
+      const velDecay = Math.exp(-dt * 1.8);
+      dragVelocity.current.y *= velDecay;
+      dragVelocity.current.x *= velDecay;
+      const springDecay = Math.exp(-dt * 0.9);
+      dragOffset.current.y *= springDecay;
+      dragOffset.current.x *= springDecay;
     }
 
     const t = state.clock.elapsedTime;

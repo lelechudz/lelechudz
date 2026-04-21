@@ -127,6 +127,45 @@ export function Phone({ project, focused, dimmed, onHover, onClick }: Props) {
         <boxGeometry args={[0.22, 0.04, 0.002]} />
         <meshStandardMaterial color="#05050a" roughness={0.9} />
       </mesh>
+
+      <RoundedBox
+        args={[0.3, 0.3, 0.04]}
+        radius={0.05}
+        smoothness={4}
+        position={[-0.22, 0.6, -0.065]}
+      >
+        <meshStandardMaterial color="#0a0a12" roughness={0.7} metalness={0.35} />
+      </RoundedBox>
+      <mesh position={[-0.29, 0.68, -0.09]} rotation={[Math.PI / 2, 0, 0]}>
+        <cylinderGeometry args={[0.055, 0.055, 0.025, 24]} />
+        <meshStandardMaterial color="#02020a" roughness={0.15} metalness={0.95} />
+      </mesh>
+      <mesh position={[-0.29, 0.68, -0.105]} rotation={[Math.PI / 2, 0, 0]}>
+        <cylinderGeometry args={[0.028, 0.028, 0.005, 24]} />
+        <meshStandardMaterial
+          color="#4a9eff"
+          emissive="#2a5dff"
+          emissiveIntensity={0.3}
+          roughness={0.1}
+          metalness={0.8}
+        />
+      </mesh>
+      <mesh position={[-0.14, 0.54, -0.09]} rotation={[Math.PI / 2, 0, 0]}>
+        <cylinderGeometry args={[0.042, 0.042, 0.022, 24]} />
+        <meshStandardMaterial color="#02020a" roughness={0.15} metalness={0.95} />
+      </mesh>
+      <mesh position={[-0.14, 0.54, -0.103]} rotation={[Math.PI / 2, 0, 0]}>
+        <cylinderGeometry args={[0.02, 0.02, 0.005, 24]} />
+        <meshStandardMaterial color="#1a1a24" roughness={0.2} metalness={0.7} />
+      </mesh>
+      <mesh position={[-0.07, 0.72, -0.07]}>
+        <boxGeometry args={[0.015, 0.015, 0.003]} />
+        <meshStandardMaterial
+          color="#ffb347"
+          emissive="#ffb347"
+          emissiveIntensity={0.6}
+        />
+      </mesh>
     </group>
   );
 }

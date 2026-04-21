@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import type { Project } from "@/lib/projects";
-import { GlassPanel } from "@/components/ui/GlassPanel";
-import { DitheredImage } from "@/components/ui/DitheredImage";
+import { PhoneFrame } from "@/components/ui/PhoneFrame";
 import { ScrambleText } from "@/components/ui/ScrambleText";
 
 interface Props {
@@ -66,22 +65,11 @@ export function ProjectCard({ project, index }: Props) {
       </div>
 
       <div className="flex items-center justify-center">
-        <GlassPanel
-          ditherStrength="strong"
-          className="aspect-[9/19.5] w-full max-w-[360px]"
-          style={{
-            boxShadow: `0 0 80px ${project.accent}33`,
-          }}
-        >
-          <DitheredImage
-            src={project.screen}
-            alt={`${project.title} app screen`}
-            width={1080}
-            height={2340}
-            ditherSize={3}
-            className="h-full w-full"
-          />
-        </GlassPanel>
+        <PhoneFrame
+          src={project.screen}
+          alt={`${project.title} app screen`}
+          accent={project.accent}
+        />
       </div>
     </article>
   );
