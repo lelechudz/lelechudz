@@ -1,0 +1,49 @@
+"use client";
+
+import { Canvas } from "@react-three/fiber";
+import { AdaptiveDpr, AdaptiveEvents, Environment } from "@react-three/drei";
+import { EffectComposer, Vignette } from "@react-three/postprocessing";
+import { Suspense, useEffect, useState } from "react";
+import { isWebGLAvailable } from "@/lib/webgl";
+import { useMotionPrefs } from "@/components/providers/MotionPrefsProvider";
+import { PhoneConstellation } from "./PhoneConstellation";
+import { DitherPass } from "./DitherPass";
+import { FallbackImage } from "./FallbackImage";
+
+export function HeroCanvas() {
+  const { reducedMotion } = useMotionPrefs();
+  const [webgl, setWebgl] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    setWebgl(isWebGLAvailable());
+  }, []);
+
+  if (webgl === false) return <FallbackImage />;
+  if (webgl === null) return null;
+
+  return (
+    <Canvas
+      camera={{ position: [0, 0, 6], fov: 40 }}
+      dpr={[1, 2]}
+      frameloop={reducedMotion ? "demand" : "always"}
+      gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+      aria-label="Interactive 3D showcase of four mobile apps: Enhanced EQ, MediAlert, Helmiscan, FairFare"
+    >
+      <AdaptiveDpr pixelated />
+      <AdaptiveEvents />
+      <Environment preset="night" background={false} />
+      <ambientLight intensity={0.15} />
+      <pointLight color="#ffb347" position={[5, 3, 5]} intensity={30} />
+      <pointLight color="#c66afd" position={[-5, -2, 3]} intensity={15} />
+
+      <Suspense fallback={null}>
+        <PhoneConstellation reducedMotion={reducedMotion} />
+      </Suspense>
+
+      <EffectComposer multisampling={0}>
+        <DitherPass ditherSize={3} />
+        <Vignette offset={0.3} darkness={0.7} />
+      </EffectComposer>
+    </Canvas>
+  );
+}
