@@ -5,19 +5,23 @@ import { AdaptiveDpr, AdaptiveEvents, Environment } from "@react-three/drei";
 import { EffectComposer, Vignette } from "@react-three/postprocessing";
 import { Suspense, useEffect, useState } from "react";
 import { isWebGLAvailable } from "@/lib/webgl";
+import { useMediaQuery } from "@/lib/useMediaQuery";
 import { useMotionPrefs } from "@/components/providers/MotionPrefsProvider";
 import { PhoneConstellation } from "./PhoneConstellation";
 import { DitherPass } from "./DitherPass";
 import { FallbackImage } from "./FallbackImage";
+import { HeroMobile } from "./HeroMobile";
 
 export function HeroCanvas() {
   const { reducedMotion } = useMotionPrefs();
+  const isMobile = useMediaQuery("(max-width: 767px)");
   const [webgl, setWebgl] = useState<boolean | null>(null);
 
   useEffect(() => {
     setWebgl(isWebGLAvailable());
   }, []);
 
+  if (isMobile) return <HeroMobile />;
   if (webgl === false) return <FallbackImage />;
   if (webgl === null) return null;
 
