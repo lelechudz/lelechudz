@@ -5,6 +5,7 @@ import { ScrollProgressBar } from "@/components/ui/ScrollProgressBar";
 import { PitchSection } from "@/components/sections/PitchSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import { ExperienceSection } from "@/components/sections/ExperienceSection";
+import { EducationSection } from "@/components/sections/EducationSection";
 
 export default function Home() {
   return (
@@ -22,7 +23,7 @@ export default function Home() {
       <PitchSection />
       <ProjectsSection />
       <ExperienceSection />
-      <section id="education" className="min-h-screen border-t border-[var(--glass-stroke)]"></section>
+      <EducationSection />
       <section id="contact" className="min-h-screen border-t border-[var(--glass-stroke)]"></section>
     </>
   );
