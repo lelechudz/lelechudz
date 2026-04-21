@@ -47,21 +47,21 @@ export function PhoneFrame({
         onMouseEnter={() => setHovered(true)}
         onMouseMove={handleMove}
         onMouseLeave={handleLeave}
-        className="relative mx-auto aspect-[9/19.5] w-full max-w-[320px] rounded-[44px] p-[5px] will-change-transform"
+        className="relative mx-auto aspect-[9/18] w-full max-w-[280px] rounded-[40px] p-[5px] will-change-transform"
         style={{
           transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) translateZ(${lift}px) scale(${scale})`,
           transformStyle: "preserve-3d",
           transition:
             "transform 700ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 500ms cubic-bezier(0.22, 1, 0.36, 1)",
           background:
-            "linear-gradient(180deg, #1c1c26 0%, #08080f 55%, #14141e 100%)",
+            "linear-gradient(180deg, #2b2b38 0%, #14141e 55%, #20202c 100%)",
           boxShadow: hovered
-            ? `0 60px 140px ${accent}55, 0 18px 40px rgba(0,0,0,0.65), 0 0 0 1px rgba(255,255,255,0.08), inset 0 1px 0 rgba(255,255,255,0.1)`
-            : `0 40px 100px ${accent}33, 0 10px 28px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.06), inset 0 1px 0 rgba(255,255,255,0.08)`,
+            ? `0 60px 140px ${accent}66, 0 18px 40px rgba(0,0,0,0.7), 0 0 0 1.5px rgba(255,255,255,0.18), inset 0 1px 0 rgba(255,255,255,0.14)`
+            : `0 28px 90px ${accent}44, 0 12px 30px rgba(0,0,0,0.65), 0 0 0 1.5px rgba(255,255,255,0.14), inset 0 1px 0 rgba(255,255,255,0.12)`,
         }}
       >
         <div
-          className="relative h-full w-full overflow-hidden rounded-[40px] bg-black"
+          className="relative h-full w-full overflow-hidden rounded-[36px] bg-black"
           style={{ transform: "translateZ(1px)" }}
         >
           <Image
@@ -82,7 +82,7 @@ export function PhoneFrame({
           />
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-0 rounded-[40px]"
+            className="pointer-events-none absolute inset-0 rounded-[36px]"
             style={{
               background: hovered
                 ? `linear-gradient(135deg, transparent 30%, ${accent}15 50%, transparent 70%)`
