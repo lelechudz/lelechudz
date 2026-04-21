@@ -131,10 +131,14 @@ export function Phone({ project, focused, dimmed, onHover, onClick }: Props) {
           transparent={false}
         />
       </mesh>
-      <mesh position={[0, 0.84, 0.052]}>
-        <boxGeometry args={[0.26, 0.06, 0.002]} />
-        <meshStandardMaterial color="#030308" roughness={0.95} />
-      </mesh>
+      <RoundedBox
+        position={[0, 0.87, 0.055]}
+        args={[0.24, 0.055, 0.005]}
+        radius={0.027}
+        smoothness={12}
+      >
+        <meshStandardMaterial color="#010105" roughness={0.9} metalness={0.15} />
+      </RoundedBox>
 
       <group position={[-0.26, 0.74, -0.07]}>
         <RoundedBox args={[0.32, 0.32, 0.04]} radius={0.11} smoothness={12}>

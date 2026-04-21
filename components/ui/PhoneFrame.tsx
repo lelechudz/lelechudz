@@ -74,8 +74,11 @@ export function PhoneFrame({
           />
           <div
             aria-hidden
-            className="absolute left-1/2 top-[14px] z-10 h-[22px] w-[90px] -translate-x-1/2 rounded-full bg-black"
-            style={{ boxShadow: "inset 0 0 10px rgba(0,0,0,0.9)" }}
+            className="absolute left-1/2 top-[7px] z-10 h-[26px] w-[88px] -translate-x-1/2 rounded-full bg-black"
+            style={{
+              boxShadow:
+                "0 0 0 1px rgba(255,255,255,0.04), 0 2px 6px rgba(0,0,0,0.8)",
+            }}
           />
           <div
             aria-hidden
