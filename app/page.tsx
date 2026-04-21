@@ -4,6 +4,7 @@ import { Cursor } from "@/components/ui/Cursor";
 import { ScrollProgressBar } from "@/components/ui/ScrollProgressBar";
 import { PitchSection } from "@/components/sections/PitchSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
+import { ExperienceSection } from "@/components/sections/ExperienceSection";
 
 export default function Home() {
   return (
@@ -20,7 +21,7 @@ export default function Home() {
 
       <PitchSection />
       <ProjectsSection />
-      <section id="experience" className="min-h-screen border-t border-[var(--glass-stroke)]"></section>
+      <ExperienceSection />
       <section id="education" className="min-h-screen border-t border-[var(--glass-stroke)]"></section>
       <section id="contact" className="min-h-screen border-t border-[var(--glass-stroke)]"></section>
     </>
