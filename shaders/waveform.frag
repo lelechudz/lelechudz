@@ -1,5 +1,3 @@
-#include ./lib/bayer.glsl
-
 uniform float uTime;
 uniform vec2 uResolution;
 varying vec2 vUv;

@@ -3,8 +3,11 @@
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
+import bayerLib from "@/shaders/lib/bayer.glsl";
 import waveformVert from "@/shaders/waveform.vert";
-import waveformFrag from "@/shaders/waveform.frag";
+import waveformMain from "@/shaders/waveform.frag";
+
+const waveformFrag = `${bayerLib}\n${waveformMain}`;
 
 function WaveformMesh() {
   const matRef = useRef<THREE.ShaderMaterial>(null);

@@ -4,8 +4,11 @@ import { useRef, useMemo } from "react";
 import { useFrame, useLoader } from "@react-three/fiber";
 import * as THREE from "three";
 import type { Project } from "@/lib/projects";
+import bayerLib from "@/shaders/lib/bayer.glsl";
 import screenVert from "@/shaders/screen.vert";
-import screenFrag from "@/shaders/screen.frag";
+import screenMain from "@/shaders/screen.frag";
+
+const screenFrag = `${bayerLib}\n${screenMain}`;
 
 interface Props {
   project: Project;

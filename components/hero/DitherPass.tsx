@@ -4,7 +4,10 @@ import { Effect } from "postprocessing";
 import { forwardRef, useMemo } from "react";
 import type {} from "@react-three/fiber";
 import * as THREE from "three";
-import fragmentShader from "@/shaders/dither.frag";
+import bayerLib from "@/shaders/lib/bayer.glsl";
+import ditherMain from "@/shaders/dither.frag";
+
+const fragmentShader = `${bayerLib}\n${ditherMain}`;
 
 class DitherEffectImpl extends Effect {
   constructor({ ditherSize = 3 }: { ditherSize?: number } = {}) {

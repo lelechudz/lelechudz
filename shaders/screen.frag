@@ -1,5 +1,3 @@
-#include ./lib/bayer.glsl
-
 uniform sampler2D uScreen;
 uniform float uTime;
 uniform float uBrightness;

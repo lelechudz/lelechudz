@@ -1,14 +1,9 @@
-#include ./lib/bayer.glsl
-
-uniform sampler2D tDiffuse;
 uniform float uDitherSize;
 uniform vec2 uResolution;
-varying vec2 vUv;
 
-void main() {
-  vec4 src = texture2D(tDiffuse, vUv);
-  vec2 pix = floor(vUv * uResolution / uDitherSize);
+void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor) {
+  vec2 pix = floor(uv * uResolution / uDitherSize);
   float bias = bayer8(pix);
-  vec3 quantized = quantizeWarm(src.rgb, bias);
-  gl_FragColor = vec4(quantized, src.a);
+  vec3 quantized = quantizeWarm(inputColor.rgb, bias);
+  outputColor = vec4(quantized, inputColor.a);
 }
