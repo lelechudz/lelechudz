@@ -27,7 +27,7 @@ export function HeroCanvas() {
 
   return (
     <Canvas
-      camera={{ position: [0, 0, 6], fov: 40 }}
+      camera={{ position: [0, 0, 4.5], fov: 38 }}
       dpr={[1, 2]}
       frameloop={reducedMotion ? "demand" : "always"}
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}

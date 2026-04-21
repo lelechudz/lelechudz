@@ -59,6 +59,7 @@ export function PhoneConstellation({ reducedMotion }: Props) {
           key={p.slug}
           project={p}
           focused={hovered === p.slug}
+          dimmed={hovered !== null && hovered !== p.slug}
           onHover={setHovered}
           onClick={(slug) => router.push(`/projects/${slug}`)}
         />
