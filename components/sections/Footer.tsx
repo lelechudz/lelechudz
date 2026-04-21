@@ -2,9 +2,9 @@
 
 import { useMotionPrefs } from "@/components/providers/MotionPrefsProvider";
 
-const GITHUB_URL = "https://github.com/leichristian";
-const LINKEDIN_URL = "https://www.linkedin.com/in/lei-christian-maboloc/";
-const SOURCE_URL = "https://github.com/leichristian/portfolio";
+const GITHUB_URL = "https://github.com/lelechudz";
+const LINKEDIN_URL = "https://www.linkedin.com/in/lei-christian-maboloc-51255523b/";
+const SOURCE_URL = "https://github.com/lelechudz/lelechudz.dev";
 
 export function Footer() {
   const { pref, setPref } = useMotionPrefs();
