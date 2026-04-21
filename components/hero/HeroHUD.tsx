@@ -63,6 +63,13 @@ export function HeroHUD() {
       >
         DRAG TO ORBIT · CLICK A PHONE ↗
       </div>
+
+      <div aria-hidden="true" className="pointer-events-none absolute inset-4">
+        <span className="absolute left-0 top-0 h-4 w-4 border-l border-t border-text-dim" />
+        <span className="absolute right-0 top-0 h-4 w-4 border-r border-t border-text-dim" />
+        <span className="absolute bottom-0 left-0 h-4 w-4 border-b border-l border-text-dim" />
+        <span className="absolute bottom-0 right-0 h-4 w-4 border-b border-r border-text-dim" />
+      </div>
     </div>
   );
 }
