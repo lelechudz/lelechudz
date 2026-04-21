@@ -15,6 +15,7 @@ export interface Project {
   position: [number, number, number];
   rotation: [number, number, number];
   scale: number;
+  playStoreUrl?: string;
 }
 
 export const PROJECTS: readonly Project[] = [
@@ -36,6 +37,7 @@ export const PROJECTS: readonly Project[] = [
     position: [0.05, -0.05, 0.35],
     rotation: [0, 0.02, 0],
     scale: 1.18,
+    playStoreUrl: "https://play.google.com/store/apps/details?id=com.enhancedeq.app",
   },
   {
     slug: "medialert",

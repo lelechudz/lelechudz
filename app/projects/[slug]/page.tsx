@@ -81,6 +81,37 @@ export default async function ProjectPage({
               </div>
             ))}
           </div>
+
+          {p.playStoreUrl ? (
+            <div className="mt-12">
+              <a
+                href={p.playStoreUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cursor="hover"
+                aria-label={`Get ${p.title} on Google Play`}
+                className="inline-flex items-center gap-3 rounded-sm border border-[var(--glass-stroke)] bg-[var(--glass-fill)] px-5 py-3 font-mono text-[11px] uppercase tracking-[0.2em] text-text-primary transition hover:border-accent-amber hover:text-accent-amber"
+                style={{ borderColor: p.accent }}
+              >
+                <svg
+                  aria-hidden
+                  viewBox="0 0 24 24"
+                  width="18"
+                  height="18"
+                  fill="none"
+                >
+                  <path
+                    d="M3.6 2.4 14 12 3.6 21.6c-.4-.3-.6-.8-.6-1.3V3.7c0-.5.2-1 .6-1.3z"
+                    fill="#32BBFF"
+                  />
+                  <path d="M14 12 17.6 8.4 20.2 9.9c1 .6 1 2 0 2.6L17.6 14 14 12z" fill="#FFBC00" />
+                  <path d="M14 12 3.6 21.6c.4.3.9.4 1.4.1l12.6-7.7L14 12z" fill="#E63946" />
+                  <path d="M14 12 17.6 8.4 5 .7C4.5.4 4 .5 3.6.8L14 12z" fill="#3BCC75" />
+                </svg>
+                Get it on Google Play ↗
+              </a>
+            </div>
+          ) : null}
         </div>
 
         <div className="order-1 flex justify-center md:order-2">
