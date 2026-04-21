@@ -1,13 +1,26 @@
 import type { NextConfig } from "next";
 
+const shaderLoader = {
+  loaders: ["raw-loader", "glslify-loader"],
+  as: "*.js",
+};
+
 const nextConfig: NextConfig = {
   output: "export",
   images: {
-    unoptimized: true, // required for static export
+    unoptimized: true,
   },
   reactStrictMode: true,
   transpilePackages: ["three"],
-  turbopack: {},
+  turbopack: {
+    rules: {
+      "*.glsl": shaderLoader,
+      "*.vs": shaderLoader,
+      "*.fs": shaderLoader,
+      "*.vert": shaderLoader,
+      "*.frag": shaderLoader,
+    },
+  },
   webpack: (config) => {
     config.module.rules.push({
       test: /\.(glsl|vs|fs|vert|frag)$/,
