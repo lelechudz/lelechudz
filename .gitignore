@@ -31,11 +31,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# superpowers
+# superpowers / claude plugins
 .superpowers/
-
-# claude code local overrides
-.claude/settings.local.json
+docs/superpowers/
+.claude/
 
 # editor
 .vscode/
