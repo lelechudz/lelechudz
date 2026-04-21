@@ -4,7 +4,7 @@ import { useState } from "react";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { WaveformBackground } from "./WaveformBackground";
 
-const EMAIL = "leizermaboloc@gmail.com";
+const EMAIL = "mabolocleichristian@gmail.com";
 
 export function ContactSection() {
   const [copied, setCopied] = useState(false);

@@ -18,7 +18,7 @@ export function Footer() {
         <div className="flex flex-wrap items-center gap-6 font-mono text-[11px] uppercase tracking-[0.15em]">
           <a data-cursor="hover" href={GITHUB_URL} target="_blank" rel="noopener" className="text-text-dim hover:text-accent-amber">GitHub ↗</a>
           <a data-cursor="hover" href={LINKEDIN_URL} target="_blank" rel="noopener" className="text-text-dim hover:text-accent-amber">LinkedIn ↗</a>
-          <a data-cursor="hover" href="/resume.pdf" className="text-text-dim hover:text-accent-amber">Resume ↗</a>
+          <a data-cursor="hover" href="/resume.pdf" target="_blank" rel="noopener" className="text-text-dim hover:text-accent-amber">Resume ↗</a>
           <a data-cursor="hover" href={SOURCE_URL} target="_blank" rel="noopener" className="text-text-dim hover:text-accent-amber">View Source ↗</a>
           <label className="flex items-center gap-2 text-text-dim">
             MOTION
