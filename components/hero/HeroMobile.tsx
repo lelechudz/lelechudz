@@ -66,6 +66,7 @@ export function HeroMobile() {
           dpr={[1, 2]}
           frameloop={reducedMotion ? "demand" : "always"}
           gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+          role="img"
           aria-label={`3D mobile app preview: ${current.title}`}
         >
           <Environment preset="night" background={false} />
