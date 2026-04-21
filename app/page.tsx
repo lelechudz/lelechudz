@@ -2,6 +2,7 @@ import { HeroCanvas } from "@/components/hero/HeroCanvas";
 import { HeroHUD } from "@/components/hero/HeroHUD";
 import { Cursor } from "@/components/ui/Cursor";
 import { ScrollProgressBar } from "@/components/ui/ScrollProgressBar";
+import { PitchSection } from "@/components/sections/PitchSection";
 
 export default function Home() {
   return (
@@ -16,7 +17,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="pitch" className="min-h-screen border-t border-[var(--glass-stroke)]"></section>
+      <PitchSection />
       <section id="projects" className="min-h-screen border-t border-[var(--glass-stroke)]"></section>
       <section id="experience" className="min-h-screen border-t border-[var(--glass-stroke)]"></section>
       <section id="education" className="min-h-screen border-t border-[var(--glass-stroke)]"></section>
