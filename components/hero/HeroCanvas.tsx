@@ -8,7 +8,6 @@ import { isWebGLAvailable } from "@/lib/webgl";
 import { useMediaQuery } from "@/lib/useMediaQuery";
 import { useMotionPrefs } from "@/components/providers/MotionPrefsProvider";
 import { PhoneConstellation } from "./PhoneConstellation";
-import { DitherPass } from "./DitherPass";
 import { FallbackImage } from "./FallbackImage";
 import { HeroMobile } from "./HeroMobile";
 
@@ -36,17 +35,16 @@ export function HeroCanvas() {
       <AdaptiveDpr pixelated />
       <AdaptiveEvents />
       <Environment preset="night" background={false} />
-      <ambientLight intensity={0.15} />
-      <pointLight color="#ffb347" position={[5, 3, 5]} intensity={30} />
-      <pointLight color="#c66afd" position={[-5, -2, 3]} intensity={15} />
+      <ambientLight intensity={0.2} />
+      <pointLight color="#ffb347" position={[5, 3, 5]} intensity={28} />
+      <pointLight color="#c66afd" position={[-5, -2, 3]} intensity={14} />
 
       <Suspense fallback={null}>
         <PhoneConstellation reducedMotion={reducedMotion} />
       </Suspense>
 
       <EffectComposer multisampling={0}>
-        <DitherPass ditherSize={3} />
-        <Vignette offset={0.3} darkness={0.7} />
+        <Vignette offset={0.28} darkness={0.75} />
       </EffectComposer>
     </Canvas>
   );

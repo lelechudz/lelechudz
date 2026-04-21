@@ -44,38 +44,41 @@ export function Phone({ project, focused, dimmed, onHover, onClick }: Props) {
   useFrame((state, dt) => {
     if (!groupRef.current) return;
     const t = state.clock.elapsedTime;
-    const k = 1 - Math.exp(-dt * 10);
+    const k = 1 - Math.exp(-dt * 9);
 
-    const bob = Math.sin(t * 0.8 + project.position[0]) * 0.05;
+    const bob = focused ? 0 : Math.sin(t * 0.8 + project.position[0]) * 0.05;
     const restRotY = project.rotation[1] + Math.sin(t * 0.5 + project.position[0]) * 0.03;
 
-    const targetY = project.position[1] + bob;
-    const targetZ = project.position[2] + (focused ? 1.4 : 0);
+    const targetX = focused ? 0 : project.position[0];
+    const targetY = focused ? 0 : project.position[1] + bob;
+    const targetZ = focused ? 1.6 : project.position[2];
     const targetRotY = focused ? 0 : restRotY;
     const targetRotX = focused ? 0 : project.rotation[0];
-    const baseScale = project.scale;
-    const targetScale = baseScale * (focused ? 1.18 : 1);
+    const targetRotZ = focused ? 0 : project.rotation[2];
+    const targetScale = focused ? 1.25 : project.scale;
 
-    groupRef.current.position.y += (targetY - groupRef.current.position.y) * k;
-    groupRef.current.position.z += (targetZ - groupRef.current.position.z) * k;
-    groupRef.current.rotation.y += (targetRotY - groupRef.current.rotation.y) * k;
-    groupRef.current.rotation.x += (targetRotX - groupRef.current.rotation.x) * k;
-    const s = groupRef.current.scale.x;
-    const ns = s + (targetScale - s) * k;
-    groupRef.current.scale.setScalar(ns);
+    const g = groupRef.current;
+    g.position.x += (targetX - g.position.x) * k;
+    g.position.y += (targetY - g.position.y) * k;
+    g.position.z += (targetZ - g.position.z) * k;
+    g.rotation.x += (targetRotX - g.rotation.x) * k;
+    g.rotation.y += (targetRotY - g.rotation.y) * k;
+    g.rotation.z += (targetRotZ - g.rotation.z) * k;
+    const ns = g.scale.x + (targetScale - g.scale.x) * k;
+    g.scale.setScalar(ns);
 
     if (screenRef.current) {
       const u = screenRef.current.uniforms;
       u.uTime!.value += dt;
-      const targetBrightness = focused ? 1.35 : dimmed ? 0.55 : 1.0;
+      const targetBrightness = focused ? 1.25 : dimmed ? 0.45 : 1.0;
       u.uBrightness!.value += (targetBrightness - u.uBrightness!.value) * k;
-      const targetDither = focused ? 2.0 : 3.0;
+      const targetDither = focused ? 1.5 : 3.0;
       u.uDitherSize!.value += (targetDither - u.uDitherSize!.value) * k;
     }
 
     if (bodyRef.current) {
       const mat = bodyRef.current.material as THREE.MeshStandardMaterial;
-      const targetOpacity = dimmed ? 0.45 : 1.0;
+      const targetOpacity = dimmed ? 0.35 : 1.0;
       mat.opacity += (targetOpacity - mat.opacity) * k;
     }
   });

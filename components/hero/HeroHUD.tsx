@@ -2,10 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { ScrambleText } from "@/components/ui/ScrambleText";
+import { useFocusedPhone } from "./focusStore";
 
 export function HeroHUD() {
   const [time, setTime] = useState<string>("--:--:--");
   const [hintVisible, setHintVisible] = useState(true);
+  const focused = useFocusedPhone();
+  const dim = focused !== null;
 
   useEffect(() => {
     const tick = () => {
@@ -32,12 +35,18 @@ export function HeroHUD() {
 
   return (
     <div className="pointer-events-none absolute inset-0 z-20 text-text-primary">
-      <div className="absolute left-6 top-6 font-mono text-[11px] uppercase tracking-[0.12em] text-text-dim">
+      <div
+        className="absolute left-6 top-6 font-mono text-[11px] uppercase tracking-[0.12em] text-text-dim transition-opacity duration-500"
+        style={{ opacity: dim ? 0.15 : 1 }}
+      >
         <div>⌐ LAT 7.07° N · LNG 125.61° E ¬</div>
         <div>LOCAL TIME {time}</div>
       </div>
 
-      <div className="absolute right-6 top-6 text-right font-mono text-[11px] uppercase tracking-[0.12em] text-text-dim">
+      <div
+        className="absolute right-6 top-6 text-right font-mono text-[11px] uppercase tracking-[0.12em] text-text-dim transition-opacity duration-500"
+        style={{ opacity: dim ? 0.15 : 1 }}
+      >
         <div>◉ 4 SHIPPED</div>
         <div className="flex items-center justify-end gap-2">
           <span className="inline-block h-2 w-2 rounded-full bg-status-ok" />
@@ -45,7 +54,10 @@ export function HeroHUD() {
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-6 md:bottom-12 md:left-12">
+      <div
+        className="absolute bottom-8 left-6 transition-opacity duration-500 md:bottom-12 md:left-12"
+        style={{ opacity: dim ? 0.08 : 1 }}
+      >
         <div className="mb-2 font-mono text-[11px] uppercase tracking-[0.2em] text-text-dim">
           Mobile Developer
         </div>
@@ -59,7 +71,7 @@ export function HeroHUD() {
 
       <div
         className="absolute bottom-8 right-6 font-mono text-[10px] uppercase tracking-[0.15em] text-text-quiet transition-opacity duration-700"
-        style={{ opacity: hintVisible ? 1 : 0 }}
+        style={{ opacity: dim ? 0 : hintVisible ? 1 : 0 }}
       >
         DRAG TO ORBIT · CLICK A PHONE ↗
       </div>
