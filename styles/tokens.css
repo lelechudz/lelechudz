@@ -1,0 +1,29 @@
+:root {
+  /* Backgrounds */
+  --bg-base: #0c0a14;
+  --bg-elevated: #14111f;
+  --bg-deep: #08060f;
+
+  /* Glass */
+  --glass-fill: rgba(255, 217, 160, 0.04);
+  --glass-stroke: rgba(255, 217, 160, 0.22);
+
+  /* Text */
+  --text-primary: #ffd9a0;
+  --text-dim: rgba(255, 217, 160, 0.55);
+  --text-quiet: rgba(255, 217, 160, 0.30);
+
+  /* Accents */
+  --accent-amber: #ffb347;
+  --accent-violet: #c66afd;
+  --accent-hot: #ff6aaf;
+  --status-ok: #7affb7;
+
+  /* Spacing base */
+  --space: 8px;
+
+  /* Layout */
+  --max-width: 1440px;
+  --side-padding-desktop: 72px;
+  --side-padding-mobile: 24px;
+}
