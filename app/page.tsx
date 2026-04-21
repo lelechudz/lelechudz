@@ -15,18 +15,20 @@ export default function Home() {
       <Cursor />
       <ScrollProgressBar />
 
-      <section className="relative h-[150vh]">
-        <div className="sticky top-0 h-screen overflow-hidden">
-          <HeroCanvas />
-          <HeroHUD />
-        </div>
-      </section>
+      <main id="main">
+        <section className="relative h-[150vh]">
+          <div className="sticky top-0 h-screen overflow-hidden">
+            <HeroCanvas />
+            <HeroHUD />
+          </div>
+        </section>
 
-      <PitchSection />
-      <ProjectsSection />
-      <ExperienceSection />
-      <EducationSection />
-      <ContactSection />
+        <PitchSection />
+        <ProjectsSection />
+        <ExperienceSection />
+        <EducationSection />
+        <ContactSection />
+      </main>
       <Footer />
     </>
   );
