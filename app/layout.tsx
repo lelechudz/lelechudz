@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import { MotionPrefsProvider } from "@/components/providers/MotionPrefsProvider";
 import { LenisProvider } from "@/components/providers/LenisProvider";
+import { Cursor } from "@/components/ui/Cursor";
+import { ScrollProgressBar } from "@/components/ui/ScrollProgressBar";
 import "./globals.css";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist", display: "swap" });
@@ -31,6 +33,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to main content
         </a>
         <MotionPrefsProvider>
+          <Cursor />
+          <ScrollProgressBar />
           <LenisProvider>{children}</LenisProvider>
         </MotionPrefsProvider>
       </body>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useMotionPrefs } from "@/components/providers/MotionPrefsProvider";
 
 const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=";
 
@@ -12,11 +13,16 @@ interface Props {
 }
 
 export function ScrambleText({ text, duration = 300, trigger = "hover", className }: Props) {
+  const { reducedMotion } = useMotionPrefs();
   const [display, setDisplay] = useState(text);
   const elRef = useRef<HTMLSpanElement>(null);
   const animRef = useRef<number | null>(null);
 
   const start = () => {
+    if (reducedMotion) {
+      setDisplay(text);
+      return;
+    }
     if (animRef.current) cancelAnimationFrame(animRef.current);
     const startTime = performance.now();
     const tick = () => {
@@ -41,7 +47,7 @@ export function ScrambleText({ text, duration = 300, trigger = "hover", classNam
       if (animRef.current) cancelAnimationFrame(animRef.current);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [reducedMotion]);
 
   return (
     <span
