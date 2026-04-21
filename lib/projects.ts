@@ -10,7 +10,6 @@ export interface Project {
   stack: string[];
   accent: string;
   screen: string;
-  stylizedPlaceholder?: boolean;
   description: string;
   metrics: { label: string; value: string }[];
   position: [number, number, number];
@@ -83,8 +82,7 @@ export const PROJECTS: readonly Project[] = [
     status: "in-progress",
     stack: ["Flutter", "Dart", "Google Maps API", "REST"],
     accent: "#c66afd",
-    screen: "/screens/fairfare-placeholder.png",
-    stylizedPlaceholder: true,
+    screen: "/screens/fairfare.png",
     description:
       "A scalable fare calculator integrating Google Maps and live currency exchange APIs for worldwide travel cost estimation. In active development.",
     metrics: [
