@@ -8,6 +8,7 @@ import { isWebGLAvailable } from "@/lib/webgl";
 import { useMediaQuery } from "@/lib/useMediaQuery";
 import { useMotionPrefs } from "@/components/providers/MotionPrefsProvider";
 import { PhoneConstellation } from "./PhoneConstellation";
+import { AuroraBackground } from "./AuroraBackground";
 import { FallbackImage } from "./FallbackImage";
 import { HeroMobile } from "./HeroMobile";
 
@@ -40,6 +41,7 @@ export function HeroCanvas() {
       <pointLight color="#c66afd" position={[-5, -2, 3]} intensity={14} />
 
       <Suspense fallback={null}>
+        <AuroraBackground />
         <PhoneConstellation reducedMotion={reducedMotion} />
       </Suspense>
 

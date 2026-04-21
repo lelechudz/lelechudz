@@ -136,8 +136,8 @@ export function Phone({ project, focused, dimmed, onHover, onClick }: Props) {
         <meshStandardMaterial color="#030308" roughness={0.95} />
       </mesh>
 
-      <group position={[-0.26, 0.66, -0.07]}>
-        <RoundedBox args={[0.3, 0.3, 0.04]} radius={0.07} smoothness={8}>
+      <group position={[-0.26, 0.74, -0.07]}>
+        <RoundedBox args={[0.32, 0.32, 0.04]} radius={0.11} smoothness={12}>
           <meshStandardMaterial color="#080810" roughness={0.5} metalness={0.6} />
         </RoundedBox>
         <mesh position={[-0.06, 0.06, -0.025]} rotation={[Math.PI / 2, 0, 0]}>

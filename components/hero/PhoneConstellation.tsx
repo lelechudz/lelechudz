@@ -116,7 +116,7 @@ export function PhoneConstellation({ reducedMotion }: Props) {
 
     if (backdropRef.current) {
       const mat = backdropRef.current.material as THREE.MeshBasicMaterial;
-      const target = hovered ? 0.82 : 0;
+      const target = hovered ? 0.55 : 0;
       mat.opacity += (target - mat.opacity) * k;
     }
   });
@@ -135,7 +135,7 @@ export function PhoneConstellation({ reducedMotion }: Props) {
     <>
       <mesh ref={backdropRef} position={[0, 0, -2]} renderOrder={-1}>
         <planeGeometry args={[40, 25]} />
-        <meshBasicMaterial color="#05050a" transparent opacity={0} depthWrite={false} />
+        <meshBasicMaterial color="#0a0812" transparent opacity={0} depthWrite={false} />
       </mesh>
       <group ref={groupRef}>
         {PROJECTS.map((p) => (

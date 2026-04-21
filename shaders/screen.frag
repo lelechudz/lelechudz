@@ -4,7 +4,14 @@ uniform float uBrightness;
 uniform float uDitherSize;
 varying vec2 vUv;
 
+const vec2 SCREEN_HALF = vec2(0.44, 0.94);
+const float CORNER_R = 0.095;
+
 void main() {
+  vec2 worldXY = (vUv - 0.5) * vec2(0.88, 1.88);
+  vec2 q = abs(worldXY) - (SCREEN_HALF - CORNER_R);
+  if (q.x > 0.0 && q.y > 0.0 && length(q) > CORNER_R) discard;
+
   vec2 uv = vUv;
   uv.x += sin(uv.y * 240.0 + uTime * 1.6) * 0.00025;
 
